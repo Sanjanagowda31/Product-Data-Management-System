@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Parts</title>
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+</head>
+<body>
+
+<h1>Parts</h1>
+
+<nav>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/parts">Parts</a>
+    <a href="/documents">Documents</a>
+    <a href="/manufacturers">Manufacturers</a>
+    <a href="/manufacturer-parts">Manufacturer Parts</a>
+    <a href="/search">Search</a>
+    <a href="/logout">Logout</a>
+</nav>
+
+<h2>Create Part</h2>
+<form action="/parts/add" method="post">
+    <label>Part Type:</label>
+    <input type="text" name="name" required>
+
+    <label>Description:</label>
+    <input type="text" name="description" required>
+
+    <label>Part UOM:</label>
+    <input type="text" name="partType" required>
+
+    <button type="submit">Create Part</button>
+</form>
+
+<h2>Part List</h2>
+<p th:if="${#lists.isEmpty(parts)}">No Parts Found.</p>
+
+<table th:if="${!#lists.isEmpty(parts)}">
+    <tr>
+        <th>Part Number</th>
+        <th>Part Type</th>
+        <th>Description</th>
+        <th>Part UOM</th>
+        <th>Action</th>
+    </tr>
+    <tr th:each="part : ${parts}">
+        <td th:text="${part.number}"></td>
+        <td th:text="${part.name}"></td>
+        <td th:text="${part.description}"></td>
+        <td th:text="${part.partType}"></td>
+        <td><a th:href="@{/parts/delete(number=${part.number})}">Delete</a></td>
+    </tr>
+</table>
+
+</body>
+</html>

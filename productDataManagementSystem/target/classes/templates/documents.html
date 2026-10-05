@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Documents</title>
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+</head>
+<body>
+
+<h1>Documents</h1>
+
+<nav>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/parts">Parts</a>
+    <a href="/documents">Documents</a>
+    <a href="/manufacturers">Manufacturers</a>
+    <a href="/manufacturer-parts">Manufacturer Parts</a>
+    <a href="/search">Search</a>
+    <a href="/logout">Logout</a>
+</nav>
+
+<h2>Create Document</h2>
+<form action="/documents/add" method="post">
+    <label>Document Name:</label>
+    <input type="text" name="name" required>
+
+    <label>Description:</label>
+    <input type="text" name="description" required>
+
+    <label>Version:</label>
+    <input type="text" name="version" required>
+
+    <button type="submit">Create Document</button>
+</form>
+
+<h2>Document List</h2>
+<p th:if="${#lists.isEmpty(documents)}">No Documents Found.</p>
+
+<table th:if="${!#lists.isEmpty(documents)}">
+    <tr>
+        <th>Document Number</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Version</th>
+        <th>Action</th>
+    </tr>
+    <tr th:each="document : ${documents}">
+        <td th:text="${document.number}"></td>
+        <td th:text="${document.name}"></td>
+        <td th:text="${document.description}"></td>
+        <td th:text="${document.version}"></td>
+        <td><a th:href="@{/documents/delete(number=${document.number})}">Delete</a></td>
+    </tr>
+</table>
+
+</body>
+</html>

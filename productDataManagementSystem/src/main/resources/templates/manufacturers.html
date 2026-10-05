@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Manufacturers</title>
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+</head>
+<body>
+
+<h1>Manufacturers</h1>
+
+<nav>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/parts">Parts</a>
+    <a href="/documents">Documents</a>
+    <a href="/manufacturers">Manufacturers</a>
+    <a href="/manufacturer-parts">Manufacturer Parts</a>
+    <a href="/search">Search</a>
+    <a href="/logout">Logout</a>
+</nav>
+
+<h2>Create Manufacturer</h2>
+<form action="/manufacturers/add" method="post">
+    <label>Manufacturer Name:</label>
+    <input type="text" name="name" required>
+
+    <label>Country:</label>
+    <input type="text" name="country" required>
+
+    <button type="submit">Create Manufacturer</button>
+</form>
+
+<h2>Manufacturer List</h2>
+<p th:if="${#lists.isEmpty(manufacturers)}">No Manufacturers Found.</p>
+
+<table th:if="${!#lists.isEmpty(manufacturers)}">
+    <tr>
+        <th>Manufacturer ID</th>
+        <th>Name</th>
+        <th>Country</th>
+        <th>Action</th>
+    </tr>
+    <tr th:each="manufacturer : ${manufacturers}">
+        <td th:text="${manufacturer.manufacturerId}"></td>
+        <td th:text="${manufacturer.name}"></td>
+        <td th:text="${manufacturer.country}"></td>
+        <td><a th:href="@{/manufacturers/delete(id=${manufacturer.manufacturerId})}">Delete</a></td>
+    </tr>
+</table>
+
+</body>
+</html>

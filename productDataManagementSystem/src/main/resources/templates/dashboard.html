@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" th:href="@{/css/dashboard.css}">
+</head>
+<body>
+
+<h1>Product Data Management System</h1>
+<h2>Dashboard</h2>
+
+<div class="summary">
+    <div>Total Parts: <b th:text="${totalParts}"></b></div>
+    <div>Total Documents: <b th:text="${totalDocuments}"></b></div>
+    <div>Total Manufacturers: <b th:text="${totalManufacturers}"></b></div>
+    <div>Total Manufacturer Parts: <b th:text="${totalManufacturerParts}"></b></div>
+</div>
+
+<nav>
+    <a href="/parts">Parts</a>
+    <a href="/documents">Documents</a>
+    <a href="/manufacturers">Manufacturers</a>
+    <a href="/manufacturer-parts">Manufacturer Parts</a>
+    <a href="/search">Search</a>
+    <a href="/logout">Logout</a>
+</nav>
+
+</body>
+</html>

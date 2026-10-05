@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Manufacturer Parts</title>
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+</head>
+<body>
+
+<h1>Manufacturer Parts</h1>
+
+<nav>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/parts">Parts</a>
+    <a href="/documents">Documents</a>
+    <a href="/manufacturers">Manufacturers</a>
+    <a href="/manufacturer-parts">Manufacturer Parts</a>
+    <a href="/search">Search</a>
+    <a href="/logout">Logout</a>
+</nav>
+
+<h2>Create Manufacturer Part</h2>
+<form action="/manufacturer-parts/add" method="post">
+    <label>Manufacturer Name:</label>
+    <input type="text" name="manufacturerName" required>
+
+    <label>Linked Part Number:</label>
+    <input type="text" name="linkedPartNumber" required>
+
+    <button type="submit">Create Manufacturer Part</button>
+</form>
+
+<h2>Manufacturer Part List</h2>
+<p th:if="${#lists.isEmpty(manufacturerParts)}">No Manufacturer Parts Found.</p>
+
+<table th:if="${!#lists.isEmpty(manufacturerParts)}">
+    <tr>
+        <th>MFR Part Number</th>
+        <th>Manufacturer</th>
+        <th>Linked Part</th>
+        <th>Action</th>
+    </tr>
+    <tr th:each="part : ${manufacturerParts}">
+        <td th:text="${part.manufacturerPartNumber}"></td>
+        <td th:text="${part.manufacturerName}"></td>
+        <td th:text="${part.linkedPartNumber}"></td>
+        <td><a th:href="@{/manufacturer-parts/delete(number=${part.manufacturerPartNumber})}">Delete</a></td>
+    </tr>
+</table>
+
+</body>
+</html>

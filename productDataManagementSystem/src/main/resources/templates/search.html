@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Search Data</title>
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+</head>
+<body>
+
+<h1>Search Data</h1>
+
+<nav>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/parts">Parts</a>
+    <a href="/documents">Documents</a>
+    <a href="/manufacturers">Manufacturers</a>
+    <a href="/manufacturer-parts">Manufacturer Parts</a>
+    <a href="/search">Search</a>
+    <a href="/logout">Logout</a>
+</nav>
+
+<h2>Parts</h2>
+<p th:if="${#lists.isEmpty(parts)}">No Parts Found.</p>
+<table th:if="${!#lists.isEmpty(parts)}">
+    <tr><th>Number</th><th>Name</th><th>Description</th><th>UOM</th></tr>
+    <tr th:each="part : ${parts}">
+        <td th:text="${part.number}"></td>
+        <td th:text="${part.name}"></td>
+        <td th:text="${part.description}"></td>
+        <td th:text="${part.partType}"></td>
+    </tr>
+</table>
+
+<h2>Documents</h2>
+<p th:if="${#lists.isEmpty(documents)}">No Documents Found.</p>
+<table th:if="${!#lists.isEmpty(documents)}">
+    <tr><th>Number</th><th>Name</th><th>Description</th><th>Version</th></tr>
+    <tr th:each="document : ${documents}">
+        <td th:text="${document.number}"></td>
+        <td th:text="${document.name}"></td>
+        <td th:text="${document.description}"></td>
+        <td th:text="${document.version}"></td>
+    </tr>
+</table>
+
+<h2>Manufacturers</h2>
+<p th:if="${#lists.isEmpty(manufacturers)}">No Manufacturers Found.</p>
+<table th:if="${!#lists.isEmpty(manufacturers)}">
+    <tr><th>ID</th><th>Name</th><th>Country</th></tr>
+    <tr th:each="manufacturer : ${manufacturers}">
+        <td th:text="${manufacturer.manufacturerId}"></td>
+        <td th:text="${manufacturer.name}"></td>
+        <td th:text="${manufacturer.country}"></td>
+    </tr>
+</table>
+
+<h2>Manufacturer Parts</h2>
+<p th:if="${#lists.isEmpty(manufacturerParts)}">No Manufacturer Parts Found.</p>
+<table th:if="${!#lists.isEmpty(manufacturerParts)}">
+    <tr><th>Number</th><th>Manufacturer</th><th>Linked Part</th></tr>
+    <tr th:each="part : ${manufacturerParts}">
+        <td th:text="${part.manufacturerPartNumber}"></td>
+        <td th:text="${part.manufacturerName}"></td>
+        <td th:text="${part.linkedPartNumber}"></td>
+    </tr>
+</table>
+
+</body>
+</html>
